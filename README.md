@@ -4,7 +4,7 @@ AWS Cloudwatch can be used to monitor logs and metrics. To use AWS Cloudwatch wi
 
 ## Before getting started add IAM Role to EC2 instance
 
-The CloudWatch Agent uses a policy that is attached to a role, and then attached to the EC2 instance. CloudWatchAgentAdminPolicy is the AWS managed policy that will be used. A copy of the policy is enclosed within the repo, [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/a4bc59e0f596a0eaca3af298c4e07ec4c54bb696/aws-cloudwatch-policy.json).
+The CloudWatch Agent uses a policy that is attached to a role, and then attached to the EC2 instance. CloudWatchAgentAdminPolicy is the AWS managed policy that will be used. A copy of the policy is enclosed within the repo, [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/master/aws-cloudwatch-policy.json).
 
 ## Installing collectd
 
@@ -69,12 +69,12 @@ sudo vi $AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent.json
 $AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:$AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent.json
 ```
 
-Used the `amazon-cloudwatch-agent.json`.
+Used the [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/master/amazon-cloudwatch-agent.json).
 
 
 ## Bash Script for Automation
 
-The previous sections outline the manual steps. The aws-cloudwatch-boomi-monitor.sh script can automate those steps. Place the bash script, collectd.conf, and amazon-cloudwatch-agent.json files into the same directory by cloning the repo. Then execute the aws-cloudwatch-boomi-monitor.sh bash script.
+The previous sections outline the manual steps. The [aws-cloudwatch-boomi-monitor.sh](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/master/aws-cloudwatch-boomi-monitor.sh) script can automate those steps. Place the bash script, collectd.conf, and amazon-cloudwatch-agent.json files into the same directory by cloning the repo. Then execute the aws-cloudwatch-boomi-monitor.sh bash script.
 
 
 ## Setting Up Cloudwatch
