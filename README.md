@@ -1,17 +1,10 @@
 # Setting up CloudWatch to monitor Molecule JMX
 
-## Before getting started add IAM Role to EC2 instance
-
-
 AWS Cloudwatch can be used to monitor logs and metrics. To use AWS Cloudwatch with the Boomi runtimes there needs to be two agents involved. First, the amazon-cloudwatch-agent will be used to send data to Cloudwatch and the second agent will be collectd, which will be used to retrieve JMX properties from the Boomi runtime.
 
- 
+## Before getting started add IAM Role to EC2 instance
 
-[Installing CloudWatch Agent on EC2](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-EC2-Instance.html)
-
-[How to Better Monitor Your Custom Application Metrics Using Amazon CloudWatch Agent](https://aws.amazon.com/blogs/devops/new-how-to-better-monitor-your-custom-application-metrics-using-amazon-cloudwatch-agent/)
-
- 
+The CloudWatch Agent uses a policy that is attached to a role, and then attached to the EC2 instance. CloudWatchAgentAdminPolicy is the AWS managed policy that will be used. A copy of the policy is enclosed within the repo, [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/a4bc59e0f596a0eaca3af298c4e07ec4c54bb696/aws-cloudwatch-policy.json).
 
 ## Installing collectd
 
@@ -81,7 +74,7 @@ Used the `amazon-cloudwatch-agent.json`.
 
 ## Bash Script for Automation
 
-The previous outlines the manual steps. The aws-cloudwatch-boomi-monitor.sh script can automate those steps. Place the bash script, collectd.conf, and amazon-cloudwatch-agent.json files into the same directory. Then execute the aws-cloudwatch-boomi-monitor.sh bash script.
+The previous sections outline the manual steps. The aws-cloudwatch-boomi-monitor.sh script can automate those steps. Place the bash script, collectd.conf, and amazon-cloudwatch-agent.json files into the same directory by cloning the repo. Then execute the aws-cloudwatch-boomi-monitor.sh bash script.
 
 
 ## Setting Up Cloudwatch
