@@ -99,7 +99,10 @@ vi /var/log/collectd.log
 ## Additional Links
 
 [Installing CloudWatch Agent on EC2](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-EC2-Instance.html)
+
 [How to Better Monitor Your Custom Application Metrics Using Amazon CloudWatch Agent](https://aws.amazon.com/blogs/devops/new-how-to-better-monitor-your-custom-application-metrics-using-amazon-cloudwatch-agent/)
+
 [Start the CloudWatch Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-EC2-Instance-fleet.html#start-CloudWatch-Agent-EC2-fleet)
+
 [Quick Start: Install and configure the CloudWatch Logs agent on a running EC2 Linux instance - Includes Required Policy](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html)
 
