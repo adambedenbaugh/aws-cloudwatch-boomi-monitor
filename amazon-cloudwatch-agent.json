@@ -11,7 +11,6 @@
                                                 "file_path": "/home/ec2-user/Boomi_AtomSphere/Molecule/Molecule_cloudwatch/logs/*.container.INTERNAL_IP_ADDRESS.log",
                                                 "log_group_name": "boomi-molecule-01",
                                                 "log_stream_name": "{instance_id}",
-                                                "retention_in_days": 30,
                                                 "timestamp_format": "%b %d, %Y %I:%M:%S %p %Z",
                                                 "multi_line_start_pattern": "{datetime_format}"
                                         }
