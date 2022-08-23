@@ -3,8 +3,8 @@
 # Developed for RHEL 8
 
 # Varibles 
-BOOMI_INSTALL_DIR=/home/ec2-user/Boomi_AtomSphere/Molecule/Molecule_cloudwatch
-CLOUDWATCH_LOG_GROUP_NAME=boomi-molecule-01
+BOOMI_INSTALL_DIR=/home/ec2-user/Boomi_AtomSphere/Molecule/Molecule_cloudwatch_molecule
+CLOUDWATCH_LOG_GROUP_NAME=boomi-molecule-cloudwatch-02
 
 # Install collectd
 echo "Installing java and collectd ..."
@@ -21,9 +21,9 @@ LIBJVM_SYMLINK=/usr/lib64/libjvm.so
 if [ -L ${LIBJVM_SYMLINK} ] && [ -e ${LIBJVM_SYMLINK} ]; then
     echo "Synlink to libjvm.so already exists. Skipping..."
 else
-    libjvm_location=$(sudo find / -name libjvm.so | grep -m 1 'java-11-openjdk')
+    libjvm_location=$( find / -name libjvm.so | grep -m 1 'java-11-openjdk')
     echo "libjvm_location: $libjvm_location"
-    sudo ln -s $libjvm_location /usr/lib64/libjvm.so
+    ln -s $libjvm_location /usr/lib64/libjvm.so
 fi
 
 
@@ -152,7 +152,7 @@ echo "{
                                         {
                                                 \"file_path\": \"${BOOMI_INSTALL_DIR}/logs/*.container.${INTERNAL_IP_ADDRESS}.log\",
                                                 \"log_group_name\": \"${CLOUDWATCH_LOG_GROUP_NAME}\",
-                                                \"log_stream_name\": \"{instance_id}\",
+                                                \"log_stream_name\": \"{hostname}\",
                                                 \"timestamp_format\": \"%b %d, %Y %I:%M:%S %p %Z\",
                                                 \"multi_line_start_pattern\": \"{datetime_format}\"
                                         }
