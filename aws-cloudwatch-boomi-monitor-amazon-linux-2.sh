@@ -10,7 +10,7 @@ amazon-linux-extras install -y collectd
 yum install -y collectd-java
 yum install -y collectd-generic-jmx
 
-
+# Disable SELinux for collectd
 echo "Disabling SELinux..."
 setenforce 0
 sed -i "s%SELINUX=enforcing%SELINUX=disabled%g" /etc/selinux/config
