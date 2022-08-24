@@ -15,6 +15,9 @@ dnf install -y collectd
 dnf install -y collectd-java
 dnf install -y collectd-generic-jmx
 
+echo "Disabling SELinux..."
+setenforce 0
+sed -i "s%SELINUX=enforcing%SELINUX=disabled%g" /etc/selinux/config
 
 # Looking for libjvm.so from the java-11-openjdk package that was installed
 LIBJVM_SYMLINK=/usr/lib64/libjvm.so

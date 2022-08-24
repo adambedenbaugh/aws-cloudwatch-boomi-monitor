@@ -11,6 +11,10 @@ yum install -y collectd-java
 yum install -y collectd-generic-jmx
 
 
+echo "Disabling SELinux..."
+setenforce 0
+sed -i "s%SELINUX=enforcing%SELINUX=disabled%g" /etc/selinux/config
+
 # Looking for libjvm.so from the java-openjdk11 package that was installed
 LIBJVM_SYMLINK=/usr/lib64/libjvm.so
 if [ -L ${LIBJVM_SYMLINK} ] && [ -e ${LIBJVM_SYMLINK} ]; then
