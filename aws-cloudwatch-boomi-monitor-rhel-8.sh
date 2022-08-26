@@ -15,6 +15,7 @@ dnf install -y collectd
 dnf install -y collectd-java
 dnf install -y collectd-generic-jmx
 
+# Disable SELinux for collectd
 echo "Disabling SELinux..."
 setenforce 0
 sed -i "s%SELINUX=enforcing%SELINUX=disabled%g" /etc/selinux/config
