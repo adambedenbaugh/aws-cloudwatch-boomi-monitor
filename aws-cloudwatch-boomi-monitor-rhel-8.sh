@@ -201,5 +201,4 @@ systemctl enable amazon-cloudwatch-agent
 systemctl stop amazon-cloudwatch-agent
 systemctl start amazon-cloudwatch-agent
 
-
-echo "Installation successful!"
+echo "Installation complete!"
