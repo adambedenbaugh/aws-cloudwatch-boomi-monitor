@@ -2,6 +2,10 @@
 # Script must be ran as root
 # Developed for Amazon Linux 2
 
+# Varibles 
+BOOMI_INSTALL_DIR=/home/ec2-user/Boomi_AtomSphere/Molecule/Molecule_cloudwatch_molecule
+CLOUDWATCH_LOG_GROUP_NAME=boomi-molecule-cloudwatch-02
+
 # Install collectd
 echo "Installing collectd ..."
 yum install -y amazon-linux-extras
@@ -131,9 +135,11 @@ LoadPlugin write_log
 
 # Install Amazon Cloudwatch Agent
 echo "Installing Amaon Cloudwatch Agent ..."
-yum install -y amazon-cloudwatch-agent     > /dev/null
+yum install -y amazon-cloudwatch-agent  
+
 AWS_CLOUDWATCH_AGENT_HOME="/opt/aws/amazon-cloudwatch-agent/bin"
 INTERNAL_IP_ADDRESS=$(hostname -I | sed 's/\./_/g' | xargs)
+
 echo "{
         \"agent\": {
                 \"metrics_collection_interval\": 30,
@@ -181,8 +187,7 @@ echo "{
 }" | tee $AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent.json 
 
 $AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:$AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent.json
-INTERNAL_IP_ADDRESS=$(hostname -I | sed 's/\./_/g' | xargs)
-sed -i "s/INTERNAL_IP_ADDRESS/${INTERNAL_IP_ADDRESS}/" $AWS_CLOUDWATCH_AGENT_HOME/amazon-cloudwatch-agent.json
+
 
 echo "Setting up systemd for collectd and amazon-cloudwatch-agent"
 systemctl enable collectd
