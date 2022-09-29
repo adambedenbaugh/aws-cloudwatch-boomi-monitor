@@ -3,18 +3,22 @@
                 "metrics_collection_interval": 30,
                 "run_as_user": "root"
         },
+        "logs": {
+                "logs_collected": {
+                        "files": {
+                                "collect_list": [
+                                        {
+                                                "file_path": "/home/ec2-user/Boomi_AtomSphere/Molecule/Molecule_cloudwatch/logs/*.container.INTERNAL_IP_ADDRESS.log",
+                                                "log_group_name": "boomi-molecule-01",
+                                                "log_stream_name": "{instance_id}",
+                                                "timestamp_format": "%b %d, %Y %I:%M:%S %p %Z",
+                                                "multi_line_start_pattern": "{datetime_format}"
+                                        }
+                                ]
+                        }
+                }
+        },
         "metrics": {
-                "aggregation_dimensions": [
-                        [
-                                "InstanceId"
-                        ]
-                ],
-                "append_dimensions": {
-                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
-                        "ImageId": "${aws:ImageId}",
-                        "InstanceId": "${aws:InstanceId}",
-                        "InstanceType": "${aws:InstanceType}"
-                },
                 "metrics_collected": {
                         "collectd": {
                                 "metrics_aggregation_interval": 60,
@@ -35,11 +39,6 @@
                                         "mem_used_percent"
                                 ],
                                 "metrics_collection_interval": 30
-                        },
-                        "statsd": {
-                                "metrics_aggregation_interval": 60,
-                                "metrics_collection_interval": 10,
-                                "service_address": ":8125"
                         }
                 }
         }

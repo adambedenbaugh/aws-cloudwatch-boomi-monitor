@@ -13,7 +13,7 @@ The CloudWatch Agent uses a policy that is attached to a role, and then attached
 First we will want to install a few packages. I’ll be assuming RHEL as the linux distribution.
 
 ```
-# Install the Amazon Linux Extras package
+# Install the Amazon Linux Extras package within Amazon Linux 2
 sudo yum install -y amazon-linux-extras
 
 # Install a local version of java. 
