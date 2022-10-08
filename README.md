@@ -2,15 +2,15 @@
 
 AWS Cloudwatch can be used to monitor logs and metrics. To use AWS Cloudwatch with the Boomi runtimes there needs to be two agents involved. First, the amazon-cloudwatch-agent will be used to send data to Cloudwatch and the second agent will be collectd, which will be used to retrieve JMX properties from the Boomi runtime.
 
-## Before getting started add IAM Role to EC2 instance
+## Before getting started add IAM Role to an EC2 instance
 
-The CloudWatch Agent uses a policy that is attached to a role, and then attached to the EC2 instance. CloudWatchAgentAdminPolicy is the AWS managed policy that will be used. A copy of the policy is enclosed within the repo, [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/master/aws-cloudwatch-policy.json).
+The CloudWatch Agent uses a policy that is attached to a role, and then the role is attached to the EC2 instance. CloudWatchAgentAdminPolicy is the AWS-managed policy that will be used. A copy of the policy is enclosed within the repo, [amazon-cloudwatch-agent.json](https://github.com/adambedenbaugh/aws-cloudwatch-boomi-monitor/blob/master/aws-cloudwatch-policy.json).
 
 ## Installing collectd
 
-[collectd](https://collectd.org/) is a powerful and robust service that is used to collect metrics. It’s built on C and uses plug-ins for it’s functionality. We’ll be covering the plug-ins for [logging](https://collectd.org/wiki/index.php/Plugin:LogFile) of collectd, [java](https://collectd.org/wiki/index.php/Plugin:Java), and [jmx](https://collectd.org/wiki/index.php/Plugin:GenericJMX). 
+[collectd](https://collectd.org/) is a powerful and robust service that is used to collect metrics. It’s built on C and uses plug-ins for it’s functionality. We’ll be covering the plug-ins for [logging](https://collectd.org/wiki/index.php/Plugin:LogFile) collectd, [java](https://collectd.org/wiki/index.php/Plugin:Java), and [jmx](https://collectd.org/wiki/index.php/Plugin:GenericJMX). 
 
-First we will want to install a few packages. I’ll be assuming RHEL as the linux distribution.
+First, we will want to install a few packages. I’ll be assuming RHEL as the Linux distribution.
 
 ```
 # Install the Amazon Linux Extras package within Amazon Linux 2
@@ -54,9 +54,9 @@ collectd has now been setup.
 sudo yum install -y amazon-cloudwatch-agent
 ```
 
-`amazon-cloudwatch-agent` will get installed to `/opt/aws/amazon-cloudwatch-agent/bin`. There are a few ways to start amazon-cloudwatch-agent. `bin/amazon-cloudwatch-agent-config-wizard` will start the auto config. This is helpful if you do not know what you want. 
+`amazon-cloudwatch-agent` will get installed to `/opt/aws/amazon-cloudwatch-agent/bin`. There are a few ways to start amazon-cloudwatch-agent. `bin/amazon-cloudwatch-agent-config-wizard` will start the auto-config. This is helpful if you do not know what you want. 
 
-For us, we are going to use the config file that is below and implement it by running the following command. The user that the server is being run as is defined. Additional, under the collectd metrics, the connection that was referenced earlier under network is defined. 
+For us, we are going to use the config file that is below and implement it by running the following command. The user that the server is being run as is defined. Additionally, under the collectd metrics, the connection that was referenced earlier under network is defined. 
 
 ```
 # Set the CloudWatch Agent's directory
