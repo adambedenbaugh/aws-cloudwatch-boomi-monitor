@@ -18,7 +18,7 @@ sudo yum install -y amazon-linux-extras
 
 # Install a local version of java. 
 # You can use the Boomi's runtime version of Java as an additional option.
-amazon-linux-extras install -y java-openjdk11 
+amazon-linux-extras install -y java-11-openjdk-devel
 
 # Install collectd and additional packages
 amazon-linux-extras install -y collectd
@@ -27,12 +27,14 @@ sudo yum install -y collectd-generic-jmx
 ```
 
 
-Once, that is installed, next create a symlink for libjvm.so. There will likely be two or more libjvm.so files on the server. To find all locations execute locate libjvm.so. collectd is assuming that it is located within /usr/lib64/ and will fail to load it is not found. There are [other ways](https://github.com/collectd/collectd/blob/main/docs/BUILD.java.md) to achieve this same configuration but I found this to be the easiest to implement. 
+Once, that is installed, next create a symlink for libjvm.so. The documentation uses libjvm.so from the java-11-openjdk-devel package. A symlink to java-11-openjdk is used so that the libjvm.so symlink doesn't break when java is updated. collectd is assuming that it is located within /usr/lib64/ and will fail to load it is not found. There are [other ways](https://github.com/collectd/collectd/blob/main/docs/BUILD.java.md) to achieve this same configuration but I found this to be the easiest to implement. 
 
 ```
-# Look for the libjvm.so that's within the java-11-openjdk directory.
-# The directory is from the java-openjdk11 that was installed earlier.
-libjvm_location=$(locate libjvm.so | grep -m 1 'java-11-openjdk')
+# This directory is from the java-11-openjdk-devel package
+# Use this location for libjvm.so because it uses a symlink (/usr/lib/jvm/java-11/openjdk)
+# /usr/lib/jvm/java-11-openjdk/lib/server/libjvm.so
+
+libjvm_location=/usr/lib/jvm/java-11-openjdk/lib/server/libjvm.so
 ln -s $libjvm_location /usr/lib64/libjvm.so
 ```
 
